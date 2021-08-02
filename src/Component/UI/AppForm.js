@@ -11,12 +11,10 @@ class AppForm extends Component{
 
         const CITY_NAME = event.target['city-name'].value;
         try{
-            const URL = `https://us1.locationiq.com/v1/search.php?key=pk.d3ab1ae808729a0a639f4b074bd743ac&q=${CITY_NAME}&format=json`;
+            const URL = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_kEY}&q=${CITY_NAME}&format=json`;
             const RESPONS = await axios.get(URL);
             const DATA = RESPONS.data[0];
-    
             this.props.setlocationVars(DATA.display_name, DATA.lat, DATA.lon, DATA.icon);
-            console.log(DATA.display_name, DATA.lat, DATA.lon);
         }catch{
             this.props.errHandler('Unable to geocode');
         }
