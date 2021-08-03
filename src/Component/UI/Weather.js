@@ -6,7 +6,9 @@ class Weather extends Component{
     render(){
         return(
             <>
-                {this.props.forcastData.map(forcastObj => {
+                <section>
+                    <h2 className="text-center text-dark mb-5">City Weather Forcast</h2>
+                    {this.props.forcastData.map(forcastObj => {
                     return(
                         <Card className="w-50 p-4 m-4 bg-light test-dark" key={forcastObj.date}>
                             <Card.Header className="card-header">{forcastObj.date}</Card.Header>
@@ -14,6 +16,7 @@ class Weather extends Component{
                         </Card>
                     );
                 })}
+                </section>
             </>
         );
     }
