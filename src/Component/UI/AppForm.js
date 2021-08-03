@@ -11,12 +11,20 @@ class AppForm extends Component{
 
         const CITY_NAME = event.target['city-name'].value;
         try{
-            const URL = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_kEY}&q=${CITY_NAME}&format=json`;
-            const RESPONS = await axios.get(URL);
-            const DATA = RESPONS.data[0];
-            this.props.setlocationVars(DATA.display_name, DATA.lat, DATA.lon, DATA.icon);
-        }catch{
-            this.props.errHandler('Unable to geocode');
+            //${process.env.REACT_APP_LOCATIONIQ_API_URL}
+            let url = `https://${process.env.REACT_APP_LOCATIONIQ_API_URL}?key=${process.env.REACT_APP_kEY}&q=${CITY_NAME}&format=json`;
+            let respons = await axios.get(url);
+            let geoData = respons.data[0];
+            
+            // http://localhost:3001/weather?lat=31.95&lon=35.91&searchQuery=Amman
+            url = `http://localhost:3001/weather?lat=${geoData.lat.slice(0, geoData.lat.indexOf('.') + 3)}&lon=${geoData.lon.slice(0, geoData.lon.indexOf('.') + 3)}&searchQuery=${CITY_NAME}`;
+            respons = await axios.get(url); 
+            let forcastData = respons.data;
+            
+            this.props.setCityInfo(geoData.display_name, geoData.lat, geoData.lon, forcastData);
+
+        }catch(err){
+            this.props.errHandler(err.message);
         }
 
         event.target.reset();
