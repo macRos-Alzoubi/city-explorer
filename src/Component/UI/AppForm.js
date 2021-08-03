@@ -31,7 +31,6 @@ class AppForm extends Component{
             
             this.props.setCityInfo(geoData.display_name, geoData.lat, geoData.lon, forcastData, moviesData);
 
-              
         }catch(err){
             this.props.errHandler(err.message);
         }
@@ -59,3 +58,5 @@ class AppForm extends Component{
 }
 
 export default AppForm;
+
+
