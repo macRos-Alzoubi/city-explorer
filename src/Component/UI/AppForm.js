@@ -18,11 +18,11 @@ class AppForm extends Component{
             
             // http://localhost:3001/weather?lat=31.95&lon=35.91&searchQuery=Amman
             //url = `http://localhost:3001/weather?lat=${geoData.lat.slice(0, geoData.lat.indexOf('.') + 3)}&lon=${geoData.lon.slice(0, geoData.lon.indexOf('.') + 3)}&searchQuery=${CITY_NAME}`;
-            url = `${process.env.REACT_APP_WEATHER_URL}?lat=${geoData.lat}&lon=${geoData.lon}&searchQuery=${CITY_NAME}`;
+            url = `${process.env.REACT_APP_SERVER}/weather?lat=${geoData.lat}&lon=${geoData.lon}&searchQuery=${CITY_NAME}`;
             respons = await axios.get(url);
             const forcastData = respons.data;
 
-            url = `${process.env.REACT_APP_MOVIES_URL}?cityName=${CITY_NAME}`;
+            url = `${process.env.REACT_APP_SERVER}/movies?cityName=${CITY_NAME}`;
             respons = await axios.get(url);
             const moviesData = respons.data;
 
