@@ -12,19 +12,24 @@ class AppForm extends Component{
         const CITY_NAME = event.target['city-name'].value;
         try{
             //${process.env.REACT_APP_LOCATIONIQ_API_URL}
-            let url = `https://${process.env.REACT_APP_LOCATIONIQ_API_URL}?key=${process.env.REACT_APP_kEY}&q=${CITY_NAME}&format=json`;
+            let url = `${process.env.REACT_APP_LOCATIONIQ_API_URL}?key=${process.env.REACT_APP_kEY}&q=${CITY_NAME}&format=json`;
             let respons = await axios.get(url);
-            let geoData = respons.data[0];
+            const geoData = respons.data[0];
             
             // http://localhost:3001/weather?lat=31.95&lon=35.91&searchQuery=Amman
-            url = `http://localhost:3001/weather?lat=${geoData.lat.slice(0, geoData.lat.indexOf('.') + 3)}&lon=${geoData.lon.slice(0, geoData.lon.indexOf('.') + 3)}&searchQuery=${CITY_NAME}`;
+            //url = `http://localhost:3001/weather?lat=${geoData.lat.slice(0, geoData.lat.indexOf('.') + 3)}&lon=${geoData.lon.slice(0, geoData.lon.indexOf('.') + 3)}&searchQuery=${CITY_NAME}`;
+            url = `${process.env.REACT_APP_SERVER}/weather?lat=${geoData.lat}&lon=${geoData.lon}&searchQuery=${CITY_NAME}`;
             respons = await axios.get(url);
-            let forcastData = respons.data;
+            const forcastData = respons.data;
+
+            url = `${process.env.REACT_APP_SERVER}/movies?cityName=${CITY_NAME}`;
+            respons = await axios.get(url);
+            const moviesData = respons.data;
 
             if(respons.data.error)
                 throw new Error(`${respons.data.status} ${respons.data.error}`);
             
-            this.props.setCityInfo(geoData.display_name, geoData.lat, geoData.lon, forcastData);
+            this.props.setCityInfo(geoData.display_name, geoData.lat, geoData.lon, forcastData, moviesData);
 
               
         }catch(err){
