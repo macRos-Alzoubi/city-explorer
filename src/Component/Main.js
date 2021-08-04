@@ -1,10 +1,10 @@
 import { Component } from "react";
 import AppForm from "./UI/AppForm";
 import Results from "./UI/Results";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from "react-bootstrap";
 import Weather from "./UI/Weather";
 import Movies from "./UI/Movies";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Main extends Component{
 
@@ -31,26 +31,6 @@ class Main extends Component{
             doShowResults: true,
         });
     }
-
-    // setGeoLocation = (cityName, latitude, longitude) =>{
-    //     this.setState({
-    //         cityName : cityName,
-    //         latitude : latitude,
-    //         longitude : longitude,
-    //     });
-    // }
-
-    // setForcastData = (forcastData) =>{
-    //     this.setState({
-    //         forcastData : forcastData
-    //     });
-    // }
-
-    // setMoviesData = (moviesData) =>{
-    //     this.setState({
-    //         moviesData : moviesData
-    //     });
-    // }
 
     errHandler = (errMsg) =>{
         this.setState({

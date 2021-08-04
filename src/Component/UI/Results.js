@@ -6,7 +6,7 @@ class Results extends Component{
     render(){
         return (
             <>
-                <section className="p-4">
+                <section className="d-flex justify-content-center mb-5">
                     <Card className="w-75 p-3 bg-light" >
                         <Card.Title>{this.props.cityName}</Card.Title>
                         <Card.Body className="d-flex">
